@@ -1,0 +1,39 @@
+server:
+  # Run on 8080 locally, or automatically use Render's assigned PORT in production
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: audiosphere-api
+
+  # 1. Enable Java 25 Project Loom Virtual Threads!
+  # Every incoming HTTP request and database query will now run on lightweight virtual threads
+  threads:
+    virtual:
+      enabled: true
+
+  # 2. Neon PostgreSQL Database Connection
+  datasource:
+    # Important: JDBC URLs start with "jdbc:postgresql://" instead of just "postgresql://"
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  # 3. Hibernate / JPA Settings
+  jpa:
+    hibernate:
+      # 'update' automatically creates/updates tables if needed, without deleting your existing Python data
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        "[format_sql]": true
+
+  # 4. SuperTokens CAS JWT Verification
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # Spring Security automatically fetches and caches the RS256 public keys from here!
+          jwk-set-uri: ${CAS_URL}

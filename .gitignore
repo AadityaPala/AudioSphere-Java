@@ -1,0 +1,89 @@
+# ==========================================
+# 1. Confidential & Environment Files
+# ==========================================
+.env
+.env.*
+*.env
+*local*
+.*local
+
+# Spring Boot local & secret config overrides (CRITICAL for DB credentials)
+application-local.properties
+application-local.yml
+application-local.yaml
+application-dev.properties
+application-dev.yml
+application-secret.properties
+application-secret.yml
+application-secrets.properties
+application-secrets.yml
+
+# Security Keys, Certificates & Keystores
+*.pem
+*.key
+*.crt
+*.p12
+*.PFX
+*.jks
+*.keystore
+secrets/
+credentials.json
+
+# ==========================================
+# 2. Local Gateway & Custom Tooling
+# ==========================================
+Caddyfile
+.caddy/
+
+# ==========================================
+# 3. Java & Build Tools (Maven / Gradle)
+# ==========================================
+target/
+build/
+out/
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Maven Wrapper (keep the wrapper scripts & properties, ignore the binary)
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+
+# ==========================================
+# 4. IDEs & Editors
+# ==========================================
+.vscode/
+.idea/
+*.iws
+*.iml
+*.ipr
+.settings/
+.classpath
+.project
+.factorypath
+.springBeans
+.sts4-cache/
+nbproject/
+
+# ==========================================
+# 5. Logs, Crash Dumps & OS Files
+# ==========================================
+*.log
+logs/
+hs_err_pid*
+replay_pid*
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
