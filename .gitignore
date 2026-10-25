@@ -53,6 +53,7 @@ out/
 # Maven Wrapper (keep the wrapper scripts & properties, ignore the binary)
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
+src/main/resources/META-INF/
 
 # Gradle
 .gradle/

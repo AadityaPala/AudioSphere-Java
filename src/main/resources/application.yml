@@ -37,3 +37,12 @@ spring:
         jwt:
           # Spring Security automatically fetches and caches the RS256 public keys from here!
           jwk-set-uri: ${CAS_URL}
+  
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: health,prometheus
+    metrics:
+      tags:
+        application: audiosphere-api
