@@ -30,6 +30,9 @@ public class PlaylistLink {
     @Column(name = "lyrics", columnDefinition = "TEXT")
     private String lyrics;
 
+    @Column (name = "artist")
+    private String artist;
+
     // Constructors, getters, and setters
 
     public PlaylistLink() {}

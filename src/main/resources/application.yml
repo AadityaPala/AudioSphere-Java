@@ -1,3 +1,4 @@
+
 server:
   port: ${PORT:8080}
 
@@ -25,7 +26,12 @@ spring:
         jwt:
           jwk-set-uri: "${CAS_URL}"
 
-management:            # <-- top level, NOT under spring
+# Python recommendation service
+python:
+  service:
+    url: ${PYTHON_SERVICE_URL}
+
+management:
   endpoints:
     web:
       exposure:
