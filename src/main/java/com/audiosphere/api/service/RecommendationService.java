@@ -1,4 +1,3 @@
-
 package com.audiosphere.api.service;
 
 import com.audiosphere.api.dto.RecommendationRequest;
@@ -8,12 +7,13 @@ import com.audiosphere.api.model.PlaylistLink;
 import com.audiosphere.api.repository.PlaylistLinkRepository;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -30,6 +30,7 @@ public class RecommendationService {
             String pythonServiceUrl) {
 
         this.playlistRepository = playlistRepository;
+
         this.pythonClient = restClientBuilder
                 .baseUrl(pythonServiceUrl)
                 .build();
@@ -37,15 +38,14 @@ public class RecommendationService {
 
     public List<RecommendationResponse> getRecommendations(
             String userId,
-            int requestedLimit) {
+            int requestedLimit,
+            String preferredGenre) {
 
         int limit = Math.max(1, Math.min(requestedLimit, 30));
 
-        // Retrieve only this authenticated user's saved tracks.
         List<PlaylistLink> savedTracks =
                 playlistRepository.findByUserId(userId);
 
-        // Python requires at least one recommendation seed.
         if (savedTracks.isEmpty()) {
             return List.of();
         }
@@ -53,16 +53,21 @@ public class RecommendationService {
         List<RecommendationSeed> seeds = savedTracks.stream()
                 .map(track -> new RecommendationSeed(
                         track.getTitle(),
-                        null, // PlaylistLink currently has no artist field.
+                        null,
                         track.getGenre(),
                         track.getReleaseYear()
                 ))
                 .toList();
 
         RecommendationRequest request =
-                new RecommendationRequest(seeds, limit);
+                new RecommendationRequest(
+                        seeds,
+                        limit,
+                        preferredGenre
+                );
 
         try {
+
             List<RecommendationResponse> response =
                     pythonClient.post()
                             .uri("/recommendations")
@@ -70,13 +75,15 @@ public class RecommendationService {
                             .body(request)
                             .retrieve()
                             .body(
-                                new org.springframework.core.ParameterizedTypeReference<
-                                        List<RecommendationResponse>>() {}
+                                new ParameterizedTypeReference<
+                                    List<RecommendationResponse>
+                                >() {}
                             );
 
             return response != null ? response : List.of();
 
         } catch (RestClientException exception) {
+
             throw new ResponseStatusException(
                     HttpStatus.BAD_GATEWAY,
                     "Recommendation service is unavailable: "

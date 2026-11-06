@@ -24,13 +24,13 @@ public class RecommendationController {
     @GetMapping
     public List<RecommendationResponse> getRecommendations(
             @AuthenticationPrincipal Jwt jwt,
-            @RequestParam(defaultValue = "12") int limit) {
-
-        String userId = jwt.getSubject();
+            @RequestParam(defaultValue = "12") int limit,
+            @RequestParam(required = false) String genre) {
 
         return recommendationService.getRecommendations(
-                userId,
-                limit
+                jwt.getSubject(),
+                limit,
+                genre
         );
     }
 }
