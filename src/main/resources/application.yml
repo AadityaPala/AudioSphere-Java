@@ -46,3 +46,8 @@ spring:
     metrics:
       tags:
         application: audiosphere-api
+
+# Python FastAPI recommendation service
+python:
+  service:
+    url: ${PYTHON_SERVICE_URL:http://localhost:8000}
