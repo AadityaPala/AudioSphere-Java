@@ -1,5 +1,5 @@
 
-package com.audiosphere.service;
+package com.audiosphere.api.service;
 
 public class RecommendationServiceException extends RuntimeException {
 
