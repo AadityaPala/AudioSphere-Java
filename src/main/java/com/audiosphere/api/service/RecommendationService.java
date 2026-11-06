@@ -46,7 +46,7 @@ public class RecommendationService {
         List<RecommendationSeed> seeds = savedTracks.stream()
                 .map(track -> new RecommendationSeed(
                         track.getTitle(),
-                        null,
+                        track.getArtist(),
                         track.getGenre(),
                         track.getReleaseYear()))
                 .toList();
