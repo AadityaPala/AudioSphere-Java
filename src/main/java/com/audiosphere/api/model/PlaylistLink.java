@@ -18,6 +18,9 @@ public class PlaylistLink {
     @Column(name = "title", nullable = false)
     private String title;
 
+    @Column(name = "artist")
+    private String artist;
+
     @Column(name = "album_art_url")
     private String albumArtUrl;
 
@@ -30,14 +33,13 @@ public class PlaylistLink {
     @Column(name = "lyrics", columnDefinition = "TEXT")
     private String lyrics;
 
-    // Constructors, getters, and setters
-
     public PlaylistLink() {}
 
     public PlaylistLink(
             String userId,
             String url,
             String title,
+            String artist,
             String albumArtUrl,
             String genre,
             String releaseYear,
@@ -45,6 +47,7 @@ public class PlaylistLink {
         this.userId = userId;
         this.url = url;
         this.title = title;
+        this.artist = artist;
         this.albumArtUrl = albumArtUrl;
         this.genre = genre;
         this.releaseYear = releaseYear;
@@ -58,6 +61,8 @@ public class PlaylistLink {
     public void setUrl(String url) { this.url = url; }
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
+    public String getArtist() { return artist; }
+    public void setArtist(String artist) { this.artist = artist; }
     public String getAlbumArtUrl() { return albumArtUrl; }
     public void setAlbumArtUrl(String albumArtUrl) { this.albumArtUrl = albumArtUrl; }
     public String getGenre() { return genre; }
