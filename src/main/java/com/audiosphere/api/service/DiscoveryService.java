@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
-import java.util.List;
+import java.util.List;\nimport java.util.Map;
 
 @Service
 public class DiscoveryService {
