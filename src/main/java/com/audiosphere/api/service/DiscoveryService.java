@@ -167,4 +167,48 @@ public class DiscoveryService {
             );
         }
     }
+
+
+    // --------------------------------------------------
+    // DISCOVERY SEARCH
+    // --------------------------------------------------
+
+    public Map<String, Object> search(String query, int limit) {
+        try {
+            Map<String, Object> response = pythonClient.get()
+                    .uri(uriBuilder -> uriBuilder
+                            .path("/discovery/search")
+                            .queryParam("q", query)
+                            .queryParam("limit", limit)
+                            .build())
+                    .retrieve()
+                    .body(new ParameterizedTypeReference<Map<String, Object>>() {});
+
+            return response != null ? response : Map.of("artists", List.of(), "tracks", List.of());
+        } catch (RestClientException exception) {
+            throw new DiscoveryServiceException("Unable to search discovery catalog", exception);
+        }
+    }
+
+    // --------------------------------------------------
+    // DISCOVERY VIDEO RESOLUTION
+    // --------------------------------------------------
+
+    public Map<String, Object> resolve(String artist, String title) {
+        try {
+            Map<String, Object> response = pythonClient.get()
+                    .uri(uriBuilder -> uriBuilder
+                            .path("/discovery/resolve")
+                            .queryParam("artist", artist)
+                            .queryParam("title", title)
+                            .build())
+                    .retrieve()
+                    .body(new ParameterizedTypeReference<Map<String, Object>>() {});
+
+            return response != null ? response : Map.of("videoId", "");
+        } catch (RestClientException exception) {
+            throw new DiscoveryServiceException("Unable to resolve discovery track", exception);
+        }
+    }
+
 }
