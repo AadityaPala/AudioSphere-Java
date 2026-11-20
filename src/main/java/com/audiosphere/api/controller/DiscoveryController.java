@@ -76,4 +76,23 @@ public class DiscoveryController {
                 Math.max(1, Math.min(limit, 10))
         );
     }
+
+    // GET /discovery/search?q=...&limit=10
+    @GetMapping("/search")
+    public Map<String, Object> search(
+            @RequestParam String q,
+            @RequestParam(defaultValue = "10") int limit) {
+
+        return discoveryService.search(q, Math.max(1, Math.min(limit, 20)));
+    }
+
+    // GET /discovery/resolve?artist=...&title=...
+    @GetMapping("/resolve")
+    public Map<String, Object> resolve(
+            @RequestParam String artist,
+            @RequestParam String title) {
+
+        return discoveryService.resolve(artist, title);
+    }
+
 }
