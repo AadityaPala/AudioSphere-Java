@@ -44,7 +44,8 @@ public class PlaylistLink {
             String albumArtUrl,
             String genre,
             String releaseYear,
-            String lyrics) {
+            String lyrics,
+            String artist) {
         this.userId = userId;
         this.url = url;
         this.title = title;
@@ -52,6 +53,7 @@ public class PlaylistLink {
         this.genre = genre;
         this.releaseYear = releaseYear;
         this.lyrics = lyrics;
+        this.artist = artist;
     }
 
     public Long getId() { return id; }
@@ -69,4 +71,6 @@ public class PlaylistLink {
     public void setReleaseYear(String releaseYear) { this.releaseYear = releaseYear; }
     public String getLyrics() { return lyrics; }
     public void setLyrics(String lyrics) { this.lyrics = lyrics; }
+    public String getArtist() { return artist; }
+    public void setArtist(String artist) { this.artist = artist; }
 }

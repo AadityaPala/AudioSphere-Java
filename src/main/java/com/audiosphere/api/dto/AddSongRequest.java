@@ -12,5 +12,6 @@ public record AddSongRequest(
     String albumArtUrl,
     String genre,
     String releaseYear,
-    String lyrics
+    String lyrics,
+    String artist
 ) {}

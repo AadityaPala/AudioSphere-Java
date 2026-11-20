@@ -6,5 +6,6 @@ public record SongResponse(
     String albumArtUrl,
     String genre,
     String releaseYear,
-    String lyrics
+    String lyrics,
+    String artist
 ) {}

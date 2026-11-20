@@ -54,7 +54,9 @@ public class PlaylistController {
                 request.albumArtUrl(),
                 request.genre(),
                 request.releaseYear(),
-                request.lyrics());
+                request.lyrics(),
+                request.artist()
+        );
         repository.save(newLink);
 
         return ResponseEntity.ok(toSongResponse(newLink));
@@ -67,7 +69,9 @@ public class PlaylistController {
                 link.getAlbumArtUrl(),
                 link.getGenre(),
                 link.getReleaseYear(),
-                link.getLyrics());
+                link.getLyrics(),
+                link.getArtist()
+        );
     }
 
     // DELETE /links?url=...
